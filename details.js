@@ -1,5 +1,6 @@
 const url = new URLSearchParams(window.location.search);
 const productId = url.get("productId");
+console.log(productId);
 
 async function getProduct() {
   const response = await fetch(
@@ -7,7 +8,7 @@ async function getProduct() {
     {
       headers: {
         Authorization:
-          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjQwZmQ0YmUzZDAwMTU4NDVmZWQiLCJpYXQiOjE2NjgwODQ3NTEsImV4cCI6MTY2OTI5NDM1MX0.DSo8cqtcMsmVYIbM2evKPLJZJxiSMN-4OkRTChrtfN0",
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjQwZmQ0YmUzZDAwMTU4NDVmZWQiLCJpYXQiOjE2NjgxMzYyMjMsImV4cCI6MTY2OTM0NTgyM30.VUS9Kr-_8IzdCkkChoj2bIHL51bsb4NkyqT8De780Ec",
       },
     }
   );
@@ -37,18 +38,25 @@ window.onload = async () => {
 async function onDelete() {
   //try {
 
-  // if (confirm("Do you really want to delete this event?")) {
-  const options = { method: "DELETE" };
-  const response = await fetch(
-    `https://striveschool-api.herokuapp.com/api/agenda/${appointmentId}`,
-    options
-  );
-  if (response.ok) {
-    window.location.assign("index.html");
-  } else {
-    alert("Error while deleting!");
+  if (confirm("Do you really want to delete this event?")) {
+    const options = {
+      method: "DELETE",
+
+      headers: {
+        Authorization:
+          "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MzZjZjQwZmQ0YmUzZDAwMTU4NDVmZWQiLCJpYXQiOjE2NjgxMzYyMjMsImV4cCI6MTY2OTM0NTgyM30.VUS9Kr-_8IzdCkkChoj2bIHL51bsb4NkyqT8De780Ec",
+      },
+    };
+    const response = await fetch(
+      `https://striveschool-api.herokuapp.com/api/product/${productId}`,
+      options
+    );
+    if (response.ok) {
+      window.location.assign("index.html");
+    } else {
+      alert("Error while deleting!");
+    }
   }
-  // }
 
   //   } catch (error) {
   //     alert(`Some erorr occured: ${error}`)
@@ -57,4 +65,15 @@ async function onDelete() {
 
 function onEdit() {
   window.location.assign(`backoffice.html?appointmentId=${productId}`);
+}
+
+const loader = document.getElementById("loader");
+
+function setLoading(loading) {
+  console.log("SETLOADING", loading);
+  if (loading) {
+    loader.classList.remove("d-none");
+  } else {
+    loader.classList.add("d-none");
+  }
 }
