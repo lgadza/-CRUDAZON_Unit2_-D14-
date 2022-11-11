@@ -1,5 +1,5 @@
 const url = new URLSearchParams(window.location.search);
-const productId = url.get("peoductId");
+const productId = url.get("productId");
 
 async function getProduct() {
   const response = await fetch(
@@ -12,6 +12,7 @@ async function getProduct() {
     }
   );
   const product = await response.json();
+  console.log(product);
   return product;
 }
 
@@ -55,5 +56,5 @@ async function onDelete() {
 }
 
 function onEdit() {
-  window.location.assign(`backoffice.html?appointmentId=${appointmentId}`);
+  window.location.assign(`backoffice.html?appointmentId=${productId}`);
 }

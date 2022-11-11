@@ -2,7 +2,7 @@
 
 const url = new URLSearchParams(window.location.search);
 const productId = url.get("productId");
-
+console.log(productId);
 window.onload = async () => {
   if (productId) {
     const response = await fetch(
