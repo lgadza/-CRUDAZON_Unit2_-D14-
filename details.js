@@ -18,6 +18,7 @@ async function getProduct() {
 }
 
 function renderProduct(product) {
+  console.log(product);
   document.querySelector("#product-details").innerHTML = `
       <h2 class="display-4">${product.name}</h2>
       <p>${product.description}</p>
